@@ -1,9 +1,20 @@
-export default {
-    'COMPANY': 'eos',
-    'SERVER_PORT': 3000,
-    'DB': {
-        'DATABASE': 'socialLoginProject',
-        'PORT': 3306,
-        'DB_CONNECTION_LIMIT': 10//10번 제한이라 connection하고 release 해야됨
-    }
+'use strict';
+import moment from 'moment-timezone';
+
+function resSend(res, data) {
+  if (data.error) { timeLog('    error=' + JSON.stringify(data.error)) }
+  res.send(data)
+  timeLog('    ==> res=' + JSON.stringify(data))
 }
+
+function consoleBar() {
+  console.log('-------------------------------------------------------------------');
+}
+
+function timeLog(log) {
+  const time_current = moment().tz('Asia/Seoul').format('YYYY-MM-DD H:mm:ss');            // KST
+  console.log('[KST: ' + time_current + '] ' + log);
+}
+
+
+export { resSend, consoleBar, timeLog };
